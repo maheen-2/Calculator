@@ -1,0 +1,78 @@
+*, *::before, *::after {
+box-sizing: border-box;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-weight: normal;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to right, pink, purple);
+}
+
+/* Style the video: 100% width and height to cover the entire window*/
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+  }
+
+.calculator-grid {
+    /* 🎃🎃🎃
+    Flexbox is 1-D, while CSS Grid is 2-D.
+    Flexbox lays out items along either the horizontal or the vertical axis, so you have to decide whether you want a row-based or a column-based layout.
+    Also it can also wrap in multiple rows or columns and treats each row or column as a separate entity, based on its content and the available space.
+    Grid lets you work along two axes: horizontally and vertically. 
+    Grid allows you to create 2-D layouts where you can precisely place grid items into cells defined by rows and columns.*/
+    display: grid;
+    justify-content: center;
+    align-content: center; /* Using align-content instead of items bcuz we want btns to fill all the space in btw as well.*/
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px); /* means that for every row, there will be 4 columns, each of 100px width.*/
+    /* The minmax() CSS function defines a size range > or = min and < or = max. Used with CSS Grids.*/
+    grid-template-rows: minmax(120px, auto) repeat(5,100px);  /* means that there will be a total of 5 rows, each of 100px width & each row have a height of 120px or can get larger if needed (useful for the output region).*/
+}
+
+.calculator-grid > button {
+    /* Selecting all the btns inside the grid.*/
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid whitesmoke;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.calculator-grid > button:hover {
+    /* On hovering over aby btn, we shud c a slight color change.*/
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.span-two {
+    grid-column: span 2; /* Will mek sure that these btns covers the width of 2 btns.*/
+}
+
+.output {
+    grid-column: 1/-1; /* Will mek sure the output area covers the whole row from strt to end.*/
+    background-color: rgba(0, 0, 0, 0.4);
+    /* We'll apply flex system in this output region bcuz we also want characters/ digits to wrap (go to the next line on overflow).*/
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 10px;
+    word-wrap: break-word; /* Allow long words to be able to break and wrap onto the next line = Break unbreakable words */
+    word-break: break-all; /* Specifies how words should break when reaching the end of a line = Word may be broken at any character */
+}
+
+.output .previous-operand {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.5rem;
+}
+
+.output .current-operand {
+    color: whitesmoke;
+    font-size: 2.5rem;
+}
